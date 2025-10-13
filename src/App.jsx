@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { seedPosts } from './data/posts'
+import Navbar from './components/Navbar'
+import Composer from './components/Composer'
+import Feed from './components/Feed'
+import Profile from './components/Profile'
 
-function App() {
-  const [count, setCount] = useState(0)
+const STORAGE_KEY = 'mini-insta-posts'
+
+export default function App() {
+  // Lazy init: prefer saved posts; fall back to seeds
+  const [posts, setPosts] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      return saved ? JSON.parse(saved) : seedPosts
+    } catch {
+      return seedPosts
+    }
+  })
+
+  // (Optional, mirrors PDF exactly) Hydrate on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY)
+      if (saved) setPosts(JSON.parse(saved))
+    } catch {}
+  }, [])
+
+  // Persist on every change
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts))
+    } catch {}
+  }, [posts])
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+
+      <main style={{ maxWidth: 680, margin: '0 auto', padding: '1rem' }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Composer first so new posts appear on top */}
+                <Composer setPosts={setPosts} />
+                <Feed posts={posts} setPosts={setPosts} />
+              </>
+            }
+          />
+
+          {/* Profile route: /u/:handle */}
+          <Route
+            path="/u/:handle"
+            element={<Profile posts={posts} setPosts={setPosts} />}
+          />
+
+          <Route path="*" element={<p style={{ opacity: 0.7 }}>Not found</p>} />
+        </Routes>
+      </main>
     </>
   )
 }
-
-export default App
