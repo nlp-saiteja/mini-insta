@@ -57,7 +57,9 @@ npm run dev
 - Accessibility maintained with alt text and ARIA attributes.
 
 <img src="screenshots/Part_3_checkpoint_posts.png" alt="Feed view with posts" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+_Two posts, different states - Alice's post loved by the community (❤️ 3 likes), Bob's waiting for some love (🤍 5 likes)_
 <img src="screenshots/Part_3_console_clean.png" alt="Console with no errors" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+_A developer's dream - no warnings, no errors, just clean code_
 
 ---
 
@@ -83,7 +85,18 @@ setPosts((prev) =>
 **Verification:** Comments appear immediately and persist.
 
 <img src="screenshots/Part_4_checkpoint_full_app.png" alt="Full feed with comments" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+_Full feed with comments_
+
 <img src="screenshots/Part_4_checkpoint_comment_added.png" alt="New comment added" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+_New comment added_
+
+![Console Perfection](screenshots/Part_4_checkpoint_console_clean.png)
+_Console Perfection_
+
+![comments in code](screenshots/Part_4_code_comments.png)
+_Comments in code_
 
 ---
 
@@ -105,7 +118,12 @@ setPosts((prev) => [newPost, ...prev]);
 **Verification:** New post appears at top; console clean.
 
 <img src="screenshots/Part_5_Composer_form_displayed.png" alt="Composer Form" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+Composer Form
 <img src="screenshots/Part_5_New_post_added_at_top.png" alt="New post added" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+New post added
+
+![Error-Free Creation](screenshots/Part_5_clean_console.png)
+Error-Free Creation
 
 ---
 
@@ -119,7 +137,10 @@ setPosts((prev) => [newPost, ...prev]);
 
 **Verification:** Clicking author name shows only their posts.
 
+Profile routing
 <img src="screenshots/Part_6_profile_routing.png" alt="Profile routing" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+![Seamless Navigation](screenshots/PArt_6_Author_link_navigation.png)
 
 ### B. Persistence with Local Storage
 
@@ -134,7 +155,11 @@ useEffect(() => {
 }, [posts]);
 ```
 
+Before refresh
+
 <img src="screenshots/Part_6_persistence_beforerefresh.png" alt="Before refresh" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+After refresh
 <img src="screenshots/Part_6_persistence_afterrefresh.png" alt="After refresh" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
@@ -173,9 +198,16 @@ Pressing Enter submits valid form. `aria-pressed` toggles in DevTools.
 DevTools shows meaningful alt text on all images.
 
 **Screenshots:**
+Layout and font verification
 
 <img src="screenshots/Polish_layout_fonts.png" alt="Layout and font verification" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+Button hover
+
 <img src="screenshots/Polish_button_hover.png" alt="Button hover" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+
+a11y attributes
+
 <img src="screenshots/Polish_a11y_attrs.png" alt="a11y attributes" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
@@ -185,10 +217,3 @@ DevTools shows meaningful alt text on all images.
 <img src="screenshots/Component tree.png" alt="Component tree" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
-
-## Summary
-
-All parts of **SLU-stagram** were implemented according to the rubric.  
-The application includes working routing, persistence, accessibility, and responsive styling.  
-Deployment verified and live at:  
-[https://nlp-saiteja.github.io/mini-insta/](https://nlp-saiteja.github.io/mini-insta/)
