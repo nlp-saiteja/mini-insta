@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm'
 
 export default function PostCard({ post, setPosts }) {
-  // toggle like for this post
+  // compute alt text for the main image (caption preferred, else fallback)
+  const authorHandle = `@${String(post.author).replace(/^@/, '')}`
+  const imgAlt =
+    (post.caption && post.caption.trim()) ||
+    (post.alt && String(post.alt).trim()) ||
+    `Photo by ${authorHandle}`
+
   function toggleLike() {
     setPosts(prev =>
       prev.map(p =>
@@ -39,7 +45,7 @@ export default function PostCard({ post, setPosts }) {
       >
         <img
           src={post.avatar}
-          alt={`${post.author} avatar`}
+          alt={`${String(post.author).replace(/^@/, '')} avatar`}
           width="40"
           height="40"
           style={{ borderRadius: '50%' }}
@@ -48,17 +54,17 @@ export default function PostCard({ post, setPosts }) {
           <Link
             to={`/u/${String(post.author).replace(/^@/, '')}`}
             style={{ textDecoration: 'none', color: 'inherit' }}
-            aria-label={`View @${String(post.author).replace(/^@/, '')}'s profile`}
+            aria-label={`View ${authorHandle}'s profile`}
           >
-            @{String(post.author).replace(/^@/, '')}
+            {authorHandle}
           </Link>
         </strong>
       </header>
 
-      {/* Image */}
+      {/* Post image */}
       <img
         src={post.imageUrl || post.image}
-        alt={post.alt || post.caption || 'Post image'}
+        alt={imgAlt}
         style={{ width: '100%', maxHeight: 500, objectFit: 'cover', display: 'block' }}
       />
 
@@ -72,7 +78,7 @@ export default function PostCard({ post, setPosts }) {
         <button
           onClick={toggleLike}
           aria-pressed={post.likedByMe}
-          style={{ fontSize: '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label={post.likedByMe ? 'Unlike' : 'Like'}
         >
           {post.likedByMe ? '❤️' : '🤍'}
         </button>

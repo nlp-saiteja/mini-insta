@@ -1,111 +1,77 @@
-# 📸 SLU-stagram: A React Instagram Clone
-
-> _Building the future of social media, one component at a time_
+# SLU-stagram: A React Instagram Clone
 
 **Course:** CSCI-4360 / CSCI-5360 Web Technologies  
 **Developer:** Leela Phanidhar Sai Teja Nalanagula  
-**Banner ID:** 001304595  
-**Project Status:** ✨ Complete
+**Banner ID:** 001304595
 
 ---
 
-## 🎯 Project Overview
+## Deployment Details
 
-Welcome to **SLU-stagram** – a modern, lightweight Instagram clone built with React 18 and Vite! This project showcases the power of component-based architecture, state management, and modern web development practices. From basic setup to advanced routing and persistence, this journey captures the essence of building a real-world social media application.
+The project is successfully deployed on **GitHub Pages** using Vite and `gh-pages`.
+
+**Live Link:**  
+[https://nlp-saiteja.github.io/mini-insta/](https://nlp-saiteja.github.io/mini-insta/)
+
+This deployment uses **HashRouter** for client-side routing.  
+Since GitHub Pages is a static host and does not support SPA rewrites, the hash (`#`) ensures routes work even after refreshing or sharing links.
+
+### Accessing Views
+
+| Page            | Link                                                                                                     | Description                      |
+| --------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| Home Feed       | [https://nlp-saiteja.github.io/mini-insta/#/](https://nlp-saiteja.github.io/mini-insta/#/)               | Displays all posts with Composer |
+| Alice’s Profile | [https://nlp-saiteja.github.io/mini-insta/#/u/alice](https://nlp-saiteja.github.io/mini-insta/#/u/alice) | Shows only Alice’s posts         |
+| Bob’s Profile   | [https://nlp-saiteja.github.io/mini-insta/#/u/bob](https://nlp-saiteja.github.io/mini-insta/#/u/bob)     | Shows only Bob’s posts           |
 
 ---
 
-## 🚀 Part 0: Setting Up Our Development Environment
+## Part 0: Project Setup
 
-### The Magic of Vite ⚡
-
-Before diving into React, let's talk about our build tool. **Vite** (French for "quick") is a next-generation frontend tooling that makes development feel instantaneous. Unlike traditional bundlers, Vite serves your code via native ES modules, meaning:
-
-- Lightning-fast server starts ⚡
-- Instant hot module replacement (HMR)
-- Optimized production builds
-
-### Getting Started
-
-Here's how I brought SLU-stagram to life:
+### Vite Setup
 
 ```bash
-# Created the project with Vite's React template
 npm create vite@latest mini-insta -- --template react
-
-# Navigated into our new playground
 cd mini-insta
-
-# Installed all the goodies (React, React-DOM, and more!)
 npm i
-
-# Fired up the development server 🔥
 npm run dev
 ```
 
-**Result:** Server humming at `http://localhost:5173/` 🎉
+**Result:** App running at `http://localhost:5173/`
 
-![Development Server Running](screenshots/Part_0_Server_running.png)
-_The moment our app came to life!_
+<img src="screenshots/Part_0_Server_running.png" alt="Dev server running" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
-### React 18's createRoot in Action
+**React 18 setup verification:**
 
-Confirmed our modern React 18 setup with the new `createRoot` API:
-
-![createRoot Implementation](screenshots/Part_0_create_root.png)
-_Using React 18's concurrent features from day one_
+<img src="screenshots/Part_0_create_root.png" alt="React createRoot" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## 📱 Part 3: Building the Core Feed Experience
+## Part 3: Feed and PostCard Components
 
-### Checkpoint Success! ✅
+### Features Implemented
 
-This is where SLU-stagram started to feel real. I built the foundation:
+- Navbar and Feed displaying PostCards.
+- Each PostCard includes author handle, avatar, image, caption, and like functionality.
+- Independent like state per post.
+- Accessibility maintained with alt text and ARIA attributes.
 
-#### What I Created:
-
-- **Navbar Component** - Clean, minimal header
-- **Feed Component** - The heart of our app
-- **PostCard Component** - Where the magic happens
-  - User avatars & handles (@alice, @bob)
-  - Beautiful image display
-  - Interactive like buttons (🤍 → ❤️)
-  - Real-time like counts
-  - Smooth state management
-
-#### Key Features Implemented:
-
-✨ **Independent State Management** - Each post tracks its own likes  
-✨ **Accessibility First** - Proper ARIA labels and alt text  
-✨ **Clean Console** - Zero warnings, pure React happiness
-
-![SLU-stagram Feed](screenshots/Part_3_checkpoint_posts.png)
-_Two posts, different states - Alice's post loved by the community (❤️ 3 likes), Bob's waiting for some love (🤍 5 likes)_
-
-![Clean Console](screenshots/Part_3_console_clean.png)
-_A developer's dream - no warnings, no errors, just clean code_
+<img src="screenshots/Part_3_checkpoint_posts.png" alt="Feed view with posts" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Part_3_console_clean.png" alt="Console with no errors" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## 💬 Part 4: Adding Social Interactions
+## Part 4: Comment Functionality
 
-### Comments Bring Posts to Life!
+### Features Implemented
 
-Social media isn't social without conversations. Here's what I added:
+- Added **CommentList** and **CommentForm** components.
+- Users can add new comments that appear instantly.
+- No React key warnings.
 
-#### New Components:
-
-- **CommentList** - Displays existing conversations
-- **CommentForm** - Enables new interactions
-
-#### Smart Implementation Details:
+**State update pattern:**
 
 ```javascript
-// Defensive programming for undefined comments
-<CommentList comments={post.comments ?? []} />;
-
-// Immutable state updates
 setPosts((prev) =>
   prev.map((p) => {
     if (p.id !== postId) return p;
@@ -114,150 +80,115 @@ setPosts((prev) =>
 );
 ```
 
-### Live Testing Results 🧪
+**Verification:** Comments appear immediately and persist.
 
-✅ **Like Independence Test** - Each post's likes work independently  
-✅ **Comment Flow Test** - New comments appear instantly  
-✅ **Key Warning Test** - React is happy with our list keys
-
-![Complete App with Comments](screenshots/Part_4_checkpoint_full_app.png)
-_Alice's post sparking conversations while Bob's awaits its first comment_
-
-![Adding a Comment](screenshots/Part_4_checkpoint_comment_added.png)
-_"Amazing view!" - Comments appearing in real-time_
-
-![Console Perfection](screenshots/Part_4_checkpoint_console_clean.png)
-_Still maintaining that clean console - professional standards!_
+<img src="screenshots/Part_4_checkpoint_full_app.png" alt="Full feed with comments" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Part_4_checkpoint_comment_added.png" alt="New comment added" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## ✍️ Part 5: Content Creation with the Composer
+## Part 5: Composer Component
 
-### Empowering Users to Share Their World
+### Features Implemented
 
-The Composer component transforms users from viewers to creators. Here's the magic:
+- Form for users to add new posts.
+- Validates Image URL; Caption optional.
+- Button disabled when URL invalid.
+- New post prepends to the feed.
 
-#### Smart Form Design:
-
-- **Required Field:** Image URL (because every post needs a photo!)
-- **Optional Field:** Caption (sometimes images speak for themselves)
-- **Intelligent Button:** Only enabled when ready to share
-
-#### The Technical Beauty:
+**Key logic:**
 
 ```javascript
-// New posts appear at the top, just like real Instagram
 setPosts((prev) => [newPost, ...prev]);
 ```
 
-### Creator Experience
+**Verification:** New post appears at top; console clean.
 
-![Composer Interface](screenshots/Part_5_Composer_form_displayed.png)
-_Clean, intuitive design - ready for your next masterpiece_
-
-![New Post Success](screenshots/Part_5_New_post_added_at_top.png)
-_Your content, front and center where it belongs_
-
-![Error-Free Creation](screenshots/Part_5_clean_console.png)
-_Smooth sailing - no errors in sight_
+<img src="screenshots/Part_5_Composer_form_displayed.png" alt="Composer Form" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Part_5_New_post_added_at_top.png" alt="New post added" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## 🎓 Part 6: Graduate-Level Features
+## Part 6: Routing and Persistence
 
-### Taking It to the Next Level 🚀
+### A. Routing with React Router
 
-As a graduate student, I implemented two advanced features that transform SLU-stagram into a production-ready application:
+- Implemented `/u/:handle` route for profile views.
+- Links redirect to profile pages dynamically.
+- Implemented `Profile` component filtering feed by author.
 
-### A. Client-Side Routing with React Router 🗺️
+**Verification:** Clicking author name shows only their posts.
 
-No more single-page limitations! Users can now:
+<img src="screenshots/Part_6_profile_routing.png" alt="Profile routing" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
-- Navigate to profile pages (`/u/alice`, `/u/bob`)
-- Share deep links with friends
-- Bookmark their favorite creators
-- Experience instant navigation without page reloads
+### B. Persistence with Local Storage
 
-**Implementation Highlights:**
+- Posts, likes, and comments persist through refresh.
+- Data is saved automatically on every change.
 
-```bash
-npm i react-router-dom  # Added routing superpowers
-```
+**Key logic:**
 
 ```javascript
-// Smart routing in App.jsx
-<Routes>
-  <Route path="/" element={<Feed />} />
-  <Route path="/u/:handle" element={<Profile />} />
-  <Route path="*" element={<NotFound />} />
-</Routes>
-```
-
-![Profile Routing](screenshots/Part_6_profile_routing.png)
-_Alice's personal feed - shareable, bookmarkable, beautiful_
-
-![Seamless Navigation](screenshots/PArt_6_Author_link_navigation.png)
-_Click any username to explore their content_
-
-### B. Data Persistence with localStorage 💾
-
-Your content is precious. That's why I implemented automatic saving:
-
-```javascript
-// Hydrate on load
-useEffect(() => {
-  const saved = localStorage.getItem("mini-insta-posts");
-  if (saved) setPosts(JSON.parse(saved));
-}, []);
-
-// Auto-save on changes
 useEffect(() => {
   localStorage.setItem("mini-insta-posts", JSON.stringify(posts));
 }, [posts]);
 ```
 
-**The Result:** Close your browser, restart your computer, come back tomorrow - your posts, likes, and comments are all still there!
-
-![Before Refresh](screenshots/Part_6_persistence_beforerefresh.png)
-_Created a new post..._
-
-![After Refresh](screenshots/Part_6_persistence_afterrefresh.png)
-_...and it's still there after refresh! Magic? No, just good engineering 🪄_
+<img src="screenshots/Part_6_persistence_beforerefresh.png" alt="Before refresh" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Part_6_persistence_afterrefresh.png" alt="After refresh" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## 🏆 Final Thoughts
+## Polish (5 pts): Styling & Accessibility
 
-Building SLU-stagram has been an incredible journey through modern web development. From setting up Vite to implementing advanced routing and persistence, every line of code represents a step toward mastering React and creating delightful user experiences.
+### 1. Light Styling in `index.css`
 
-### What Makes This Project Special:
+**Implemented:**
 
-- 🎨 **Clean, Intuitive UI** - Users feel at home
-- ⚡ **Blazing Fast Performance** - Thanks to Vite and React 18
-- ♿ **Accessibility Built-In** - Everyone can enjoy SLU-stagram
-- 🔧 **Production-Ready Code** - Clean console, proper error handling
-- 📱 **Mobile-Friendly** - Responsive design principles
-- 💾 **Persistent Experience** - Your data, always safe
+- System font stack applied to body.
+- `.container` class centered layout (max-width ≤ 720px).
+- Button hover and focus-visible outlines added.
 
-### Technical Achievements:
+**Verification:**  
+DevTools confirms font-family includes `system-ui`, container centered, and hover styles visible.
 
-- Zero console warnings or errors
-- Proper React patterns and best practices
-- Immutable state updates
-- Defensive programming techniques
-- Clean component architecture
-- Efficient re-rendering strategies
+### 2. Keyboard Accessibility
+
+**Implemented:**
+
+- Composer as real form with `Enter` submission.
+- Like button uses `aria-pressed` and `aria-label` for toggling.
+
+**Verification:**  
+Pressing Enter submits valid form. `aria-pressed` toggles in DevTools.
+
+### 3. Alt Texts
+
+**Implemented:**
+
+- Avatars have `{author} avatar` alt text.
+- Posts use caption or fallback `"Photo by @author"`.
+
+**Verification:**  
+DevTools shows meaningful alt text on all images.
+
+**Screenshots:**
+
+<img src="screenshots/Polish_layout_fonts.png" alt="Layout and font verification" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Polish_button_hover.png" alt="Button hover" width="600" style="border:1px solid #ccc;border-radius:8px;" />
+<img src="screenshots/Polish_a11y_attrs.png" alt="a11y attributes" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-## 🙏 Acknowledgments
+## Component Tree
 
-Thank you for taking the time to explore SLU-stagram! This project represents not just code, but a commitment to crafting quality software that users love and developers respect.
-
-_Built with ❤️ and lots of ☕ by Leela Phanidhar_
+<img src="screenshots/Component tree.png" alt="Component tree" width="600" style="border:1px solid #ccc;border-radius:8px;" />
 
 ---
 
-**Grade: Hoping for that A+ 🌟**
+## Summary
 
-> "The best way to predict the future is to build it." - _Every React Developer Ever_
+All parts of **SLU-stagram** were implemented according to the rubric.  
+The application includes working routing, persistence, accessibility, and responsive styling.  
+Deployment verified and live at:  
+[https://nlp-saiteja.github.io/mini-insta/](https://nlp-saiteja.github.io/mini-insta/)

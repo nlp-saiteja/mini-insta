@@ -20,7 +20,7 @@ export default function App() {
     }
   })
 
-  // (Optional, mirrors PDF exactly) Hydrate on mount
+  // Hydrate on mount (mirrors the lab PDF)
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
@@ -28,7 +28,7 @@ export default function App() {
     } catch {}
   }, [])
 
-  // Persist on every change
+  // Persist whenever posts change
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(posts))
@@ -38,26 +38,22 @@ export default function App() {
   return (
     <>
       <Navbar />
-
-      <main style={{ maxWidth: 680, margin: '0 auto', padding: '1rem' }}>
+      {/* Centered container per rubric */}
+      <main className="container">
         <Routes>
           <Route
             path="/"
             element={
               <>
-                {/* Composer first so new posts appear on top */}
                 <Composer setPosts={setPosts} />
                 <Feed posts={posts} setPosts={setPosts} />
               </>
             }
           />
-
-          {/* Profile route: /u/:handle */}
           <Route
             path="/u/:handle"
             element={<Profile posts={posts} setPosts={setPosts} />}
           />
-
           <Route path="*" element={<p style={{ opacity: 0.7 }}>Not found</p>} />
         </Routes>
       </main>
